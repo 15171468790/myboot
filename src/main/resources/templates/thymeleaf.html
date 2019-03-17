@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>Hello</title>
+</head>
+<body>
+<h1  th:text="${message}">Hello World</h1>
+<span th:text="'hello world !!'+${message}+'!!'"></span>
+<br/>
+<span th:align="center" th:text="|welcome to me ,!!!?${message}!|">
+
+</span>
+
+<a th:if="${flag=='yes'}" th:href="@{http://favorites.ren/}">home</a>
+<a th:unless="${flag=='no'}" th:href="@{http://favorites.ren/}">youknow</a>
+
+<table>
+    <tr th:each="user,iterStat : ${list}" >
+        <td th:align="center" th:text="${user.age lt 30 ? '年轻':'老了'}"></td>
+        <td th:align="center" th:text="${user.name}"></td>
+        <td th:align="center" th:text="${user.pass}"></td>
+        <td th:align="center" th:text="${user.date}"></td>
+        <td th:align="center" th:text="${iterStat.index}">index</td>
+
+    </tr>
+</table>
+<br/>
+<a th:href="@{https://www.baidu.com/{type}(type=${type})}">aa</a>
+
+<div th:style="'background:url(' + @{${img}} + ');'">
+    <form th:id="wgs">
+        <input  th:value="${flag}">
+    </form>
+</div>
+
+<table>
+    <tr th:switch="${flag}">
+      <td th:case="yes">yes</td>
+      <td th:case="no">no</td>
+      <td th:case="*">hhhhh</td>
+    </tr>
+</table>
+
+<div>
+    <h1>内联</h1>
+    <div th:inline="text" >
+        <p>Hello, [[${flag}]] !</p>
+        <br/>
+    </div>
+</div>
+
+<div >
+    <h1>基本对象</h1>
+    <p th:text="${#request.getAttribute('request')}">
+        <br/>
+    <p th:text="${session.session}"></p>
+    Established locale country: <span th:text="${#locale.country}">CN</span>.
+</div>
+
+<!--格式化时间-->
+<p th:text="${#dates.format(date, 'yyyy-MM-dd HH:mm:ss')}">neo</p>
+<!--创建当前时间 精确到天-->
+<p th:text="${#dates.createToday()}">neo</p>
+<!--创建当前时间 精确到秒-->
+<p th:text="${#dates.createNow()}">neo</p>
+
+
+<!--判断是否为空-->
+<p th:text="${#strings.isEmpty(userName)}">userName</p>
+<!--判断 list 是否为空-->
+<p th:text="${#strings.listIsEmpty(users)}">userName</p>
+<!--输出字符串长度-->
+<p th:text="${#strings.length(userName)}">userName</p>
+<!--拼接字符串-->
+<p th:text="${#strings.concat(userName,userName,userName)}"></p>
+<!--创建自定长度的字符串-->
+<p th:text="${#strings.randomAlphanumeric(count)}">userName</p>
+
+</body>
+<script th:inline="javascript">
+    //使用脚本内联，取值
+    window.onload =function () {
+        var flag = [[${flag}]]+'哈哈';
+        alert(flag);
+    }
+</script>
+</html>
+
