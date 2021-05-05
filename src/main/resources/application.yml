@@ -14,7 +14,8 @@ spring:
   datasource:
     password: www.mysql.com
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.43.221:3306/test?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
+    # url: jdbc:mysql://192.168.43.221:3306/test?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
+    url: jdbc:mysql://192.168.0.103:13306/test?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
 
 
 

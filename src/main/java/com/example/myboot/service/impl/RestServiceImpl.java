@@ -1,9 +1,12 @@
 package com.example.myboot.service.impl;
 
 import com.example.myboot.model.Massage;
+import com.example.myboot.mysqlModel.User;
+import com.example.myboot.repositoty.UserRepository;
 import com.example.myboot.service.RestService;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
@@ -14,6 +17,9 @@ public class RestServiceImpl implements RestService {
             =new ConcurrentHashMap<>();
 
     private static AtomicLong atomicLong = new AtomicLong();
+
+    @Resource
+    private UserRepository userRepository;
 
     @Override
     public void update(Massage massage,String id) {
@@ -54,7 +60,11 @@ public class RestServiceImpl implements RestService {
 
 
         }
-        return null;
+        Massage massage = new Massage();
+        List<User> all = userRepository.findALL();
+        massage.setUserList(all);
+        massageList.add(massage);
+        return massageList;
     }
 
     @Override
